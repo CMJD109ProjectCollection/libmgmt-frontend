@@ -7,7 +7,7 @@ import { UseStateHandle } from './components/UseStateHandle';
 function App() {
   return (
     <div className="App">
-        <UseStateHandle/>
+
     </div>
   );
 }
