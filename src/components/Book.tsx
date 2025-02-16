@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
+import { GetBooks} from '../service/Book/Book'
+
+
 export const Book = ()=>{
      const tHeadings:string [] = [
         "BookId",
@@ -13,6 +17,14 @@ export const Book = ()=>{
         "Last Updated Date",
         "Last Updated Time"
      ]
+     useEffect(()=>{
+         //load book data
+         const loadData = async ()=>{
+            const getAllBooks = await GetBooks()
+            console.log("Get All Books",getAllBooks)
+         };
+         loadData();
+     },[])
      return(
          <>
          <Table striped bordered hover>
