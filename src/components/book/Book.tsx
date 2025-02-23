@@ -31,8 +31,8 @@ export const Book = ()=>{
         price: number;
         totalQty: number;
         availableQty: number; 
-        lastUpdatedDate: string; 
-        lastUpdatedTime: string; 
+        // lastUpdatedDate: string; 
+        // lastUpdatedTime: string; 
     }
     
 
