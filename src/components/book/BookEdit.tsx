@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
 interface Book {
   bookId: string;
@@ -42,6 +42,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
     handleOnClose();
   };
 
+  // grab the form input changes
+  const handleOnChange = (e :React.ChangeEvent<HTMLInputElement>)=>{
+     setBook({...book,[e.target.name]: e.target.value});
+  }
+
   console.log("Selected Row fro Book Props", selectedRow);
   
   return (
@@ -59,7 +64,13 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
           >
          <Form.Control 
             type="text" 
-            placeholder="name@example.com" />
+            placeholder="name@example.com" 
+            name="bookId"
+            value={book.bookId}
+            readOnly
+            
+        
+            />
           </FloatingLabel>
 
           <FloatingLabel
@@ -69,7 +80,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
           >
          <Form.Control 
             type="textl" 
-            placeholder="name@example.com" />
+            placeholder="name@example.com"
+            name="title"
+            value={book.title}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -78,7 +93,12 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
           >
             <Form.Control 
             type="text" 
-            placeholder="Password" />
+            placeholder="Password"
+            name="publisher"
+            value={book.publisher}
+            onChange={handleOnChange}
+            
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -88,7 +108,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
 
             <Form.Control 
             type="text" 
-            placeholder="Password" />
+            placeholder="Password" 
+            name="isbn"
+            value={book.isbn}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
 
@@ -99,7 +123,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
 
             <Form.Control 
             type="text" 
-            placeholder="Password" />
+            placeholder="Password" 
+            name="author"
+            value={book.author}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -109,7 +137,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
 
             <Form.Control 
             type="text" 
-            placeholder="Password" />
+            placeholder="Password"
+            name="edition"
+            value={book.edition}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -118,8 +150,12 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
           >
 
             <Form.Control 
-            type="nuber" 
-            placeholder="Password" />
+            type="number" 
+            placeholder="Password"
+            name="price"
+            value={book.price}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -129,7 +165,12 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
 
             <Form.Control 
             type="nuber" 
-            placeholder="Password" />
+            placeholder="Password" 
+            name="totalQty"
+            value={book.totalQty}
+            onChange={handleOnChange}
+            
+            />
           </FloatingLabel>
 
           <FloatingLabel 
@@ -139,7 +180,11 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
 
             <Form.Control 
             type="number" 
-            placeholder="Password" />
+            placeholder="Password" 
+            name="availableQty"
+            value={book.availableQty}
+            onChange={handleOnChange}
+            />
           </FloatingLabel>
 
         </Form>
