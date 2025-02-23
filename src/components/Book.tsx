@@ -37,6 +37,13 @@ export const Book = ()=>{
 
      const [books,setBooks] = useState<Book[]>([]);
 
+     const handleOnEdit = () =>{
+       alert("edit")
+     }
+     const handleOnDelete = () =>{
+      alert("delete")
+    }
+
 
 
      useEffect(()=>{
@@ -66,8 +73,8 @@ export const Book = ()=>{
               ))}
               <td>
                 <div className='d-flex gap-2'>
-                <Button variant="outline-success">Edit</Button>
-                <Button variant="outline-danger">Delete</Button>
+                <Button variant="outline-success" onClick={handleOnEdit}>Edit</Button>
+                <Button variant="outline-danger" onClick={handleOnDelete}>Delete</Button>
                 </div>
               </td>
            </tr>
