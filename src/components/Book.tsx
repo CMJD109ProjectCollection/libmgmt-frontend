@@ -57,12 +57,13 @@ export const Book = ()=>{
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {/* <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td> */}
-        </tr>
+        {books.map((row) =>(
+           <tr key={row.bookId}>
+              {Object.values(row).map((cell,index)=>(
+                <td key={index}>{cell}</td>
+              ))}
+           </tr>
+        ))}
       </tbody>
     </Table>
          </>
