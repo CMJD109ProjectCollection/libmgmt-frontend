@@ -16,9 +16,15 @@ interface BookProps{
     show:boolean;
     selectedRow :Book | null
     handleOnClose : () => void
+
 }
 
+
+
 export const BookEdit = ({show, selectedRow, handleOnClose } : BookProps) =>{
+    const handleClose = ()=>{
+        handleOnClose();
+    }
     console.log("Selected Row fro Book Props",selectedRow)
         return(
             <Modal show={show} onHide = {handleOnClose}  centered>
@@ -31,7 +37,7 @@ export const BookEdit = ({show, selectedRow, handleOnClose } : BookProps) =>{
               </Modal.Body>
       
               <Modal.Footer>
-                <Button variant="secondary">Close</Button>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
                 <Button variant="primary">Save changes</Button>
               </Modal.Footer>
             </Modal>
