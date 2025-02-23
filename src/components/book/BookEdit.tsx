@@ -9,7 +9,7 @@ interface Book {
   edition: string;
   price: number;
   totalQty: number;
-  availableQty: number;
+  avilableQty: number;
 //   lastUpdatedDate: string;
 //   lastUpdatedTime: string;
 }
@@ -29,7 +29,7 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
         edition: "",
         price: 0,
         totalQty: 0,
-        availableQty: 0
+        avilableQty: 0
     });
 
     useEffect(()=>{
@@ -181,8 +181,8 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
             <Form.Control 
             type="number" 
             placeholder="Password" 
-            name="availableQty"
-            value={book.availableQty}
+            name="avilableQty"
+            value={book.avilableQty}
             onChange={handleOnChange}
             />
           </FloatingLabel>
