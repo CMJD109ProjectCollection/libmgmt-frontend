@@ -40,10 +40,11 @@ export const Book = ()=>{
      const [showEditForm,setShowEditForm] = useState(false);
      const [ selectedRow, setSelectedRow]  =useState<Book | null>(null);
 
-     const handleOnEdit = () =>{
+     const handleOnEdit = (row : Book) =>{
        setShowEditForm(true)
+       setSelectedRow(row)
      }
-     
+
      const handleOnDelete = async (bookId :string) =>{
        try{
         await DeleteBooks(bookId);
@@ -83,7 +84,7 @@ export const Book = ()=>{
               ))}
               <td>
                 <div className='d-flex gap-2'>
-                <Button variant="outline-success" onClick={handleOnEdit}>Edit</Button>
+                <Button variant="outline-success" onClick={() =>handleOnEdit(row)}>Edit</Button>
                 <Button variant="outline-danger" onClick={() => handleOnDelete(row.bookId)}>Delete</Button>
                 </div>
               </td>
@@ -94,7 +95,8 @@ export const Book = ()=>{
     {/* Book Edit */}
     <BookEdit
       show={showEditForm}
-    
+      selectedRow = {selectedRow}
+  
     />
          </>
      )
