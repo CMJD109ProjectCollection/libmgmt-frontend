@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { DeleteBooks, GetBooks} from '../service/Book/Book'
+import { DeleteBooks, GetBooks} from '../../service/Book/Book'
+import { BookEdit } from './BookEdit';
 
 
 export const Book = ()=>{
@@ -36,10 +37,13 @@ export const Book = ()=>{
     
 
      const [books,setBooks] = useState<Book[]>([]);
+     const [showEditForm,setShowEditForm] = useState(false);
+     const [ selectedRow, setSelectedRow]  =useState<Book | null>(null);
 
      const handleOnEdit = () =>{
-       alert("edit")
+       setShowEditForm(true)
      }
+     
      const handleOnDelete = async (bookId :string) =>{
        try{
         await DeleteBooks(bookId);
@@ -50,7 +54,6 @@ export const Book = ()=>{
        }
        
     }
-
 
 
      useEffect(()=>{
@@ -88,6 +91,11 @@ export const Book = ()=>{
         ))}
       </tbody>
     </Table>
+    {/* Book Edit */}
+    <BookEdit
+      show={showEditForm}
+    
+    />
          </>
      )
 }
