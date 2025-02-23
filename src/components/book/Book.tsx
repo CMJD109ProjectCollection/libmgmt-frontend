@@ -45,6 +45,8 @@ export const Book = ()=>{
        setSelectedRow(row)
      }
 
+     const handleOnClose = () => setShowEditForm(false);
+
      const handleOnDelete = async (bookId :string) =>{
        try{
         await DeleteBooks(bookId);
@@ -96,6 +98,7 @@ export const Book = ()=>{
     <BookEdit
       show={showEditForm}
       selectedRow = {selectedRow}
+      handleOnClose = {handleOnClose}
   
     />
          </>

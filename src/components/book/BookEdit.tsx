@@ -15,12 +15,13 @@ interface Book {
 interface BookProps{
     show:boolean;
     selectedRow :Book | null
+    handleOnClose : () => void
 }
 
-export const BookEdit = ({show,selectedRow} : BookProps) =>{
+export const BookEdit = ({show, selectedRow, handleOnClose } : BookProps) =>{
     console.log("Selected Row fro Book Props",selectedRow)
         return(
-            <Modal show={show}  centered>
+            <Modal show={show} onHide = {handleOnClose}  centered>
               <Modal.Header closeButton>
                 <Modal.Title>Modal title</Modal.Title>
               </Modal.Header>
