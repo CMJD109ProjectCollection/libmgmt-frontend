@@ -1,10 +1,22 @@
 import axios from 'axios'
-const getBooksURL = "http://localhost:8075/libmgmt/api/v1/books/getall";
-export const GetBooks = async() =>{
+const baseUrl = "http://localhost:8075/libmgmt/api/v1/books";
+
+ const GetBooks = async() =>{
    try{
-    const response = await axios.get(getBooksURL)
+    const response = await axios.get(`${baseUrl}/getall`)
     return response.data;
    }catch(err){
        console.error(err)
    }
 } 
+
+ const DeleteBooks = async(bookId:string) =>{
+    try{
+        axios.delete(
+            `${baseUrl}/${bookId}`
+        )
+    }catch (err){
+        console.error(err)
+    }
+}
+ export {GetBooks,DeleteBooks}

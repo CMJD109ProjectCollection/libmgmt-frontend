@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { GetBooks} from '../service/Book/Book'
+import { DeleteBooks, GetBooks} from '../service/Book/Book'
 
 
 export const Book = ()=>{
@@ -40,8 +40,15 @@ export const Book = ()=>{
      const handleOnEdit = () =>{
        alert("edit")
      }
-     const handleOnDelete = () =>{
-      alert("delete")
+     const handleOnDelete = async (bookId :string) =>{
+       try{
+        await DeleteBooks(bookId);
+        setBooks(books.filter((book)=> book.bookId !== bookId))
+       }catch(err){
+         console.error(err);
+         
+       }
+       
     }
 
 
@@ -74,7 +81,7 @@ export const Book = ()=>{
               <td>
                 <div className='d-flex gap-2'>
                 <Button variant="outline-success" onClick={handleOnEdit}>Edit</Button>
-                <Button variant="outline-danger" onClick={handleOnDelete}>Delete</Button>
+                <Button variant="outline-danger" onClick={() => handleOnDelete(row.bookId)}>Delete</Button>
                 </div>
               </td>
            </tr>
