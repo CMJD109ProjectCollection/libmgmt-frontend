@@ -17,9 +17,11 @@ interface BookProps {
   show: boolean;
   selectedRow: Book | null;
   handleOnClose: () => void;
+  updateBooks: (book:Book)=> Promise<void>
+  handleUpdateState: (book:Book) => void
 }
 
-export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
+export const BookEdit = ({ show, selectedRow, handleOnClose, updateBooks, handleUpdateState }: BookProps) => {
     const [book , setBook] = useState<Book>({
         bookId: "",
         title: "",
@@ -41,6 +43,16 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
     const handleClose = () => {
     handleOnClose();
   };
+  const handleUpdate = async () =>{
+      try{
+        await updateBooks(book);
+        handleUpdateState(book)
+        handleClose();
+      }catch(err){
+        console.error(err)
+      }
+    
+  }
 
   // grab the form input changes
   const handleOnChange = (e :React.ChangeEvent<HTMLInputElement>)=>{
@@ -194,7 +206,7 @@ export const BookEdit = ({ show, selectedRow, handleOnClose }: BookProps) => {
         <Button variant="danger" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="success">Update</Button>
+        <Button variant="success" onClick={handleUpdate}>Update</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { DeleteBooks, GetBooks} from '../../service/Book/Book'
+import { DeleteBooks, GetBooks, UpdateBooks} from '../../service/Book/Book'
 import { BookEdit } from './BookEdit';
 
 
@@ -58,6 +58,13 @@ export const Book = ()=>{
        
     }
 
+    const handleUpdateState = (updatedbook : Book)=>{
+       const updatedBooks  = books.map((book)=> 
+           book.bookId === updatedbook.bookId ? updatedbook : book
+       );
+       setBooks(updatedBooks)
+    }
+
 
      useEffect(()=>{
          //load book data
@@ -68,6 +75,7 @@ export const Book = ()=>{
          };
          loadData();
      },[])
+
      return(
          <>
          <Table striped bordered hover>
@@ -99,6 +107,8 @@ export const Book = ()=>{
       show={showEditForm}
       selectedRow = {selectedRow}
       handleOnClose = {handleOnClose}
+      updateBooks = {UpdateBooks}
+      handleUpdateState = {handleUpdateState}
   
     />
          </>

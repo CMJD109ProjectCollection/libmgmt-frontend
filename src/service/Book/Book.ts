@@ -19,4 +19,14 @@ const baseUrl = "http://localhost:8075/libmgmt/api/v1/books";
         console.error(err)
     }
 }
- export {GetBooks,DeleteBooks}
+const UpdateBooks = async(book :any) =>{
+    try{
+        axios.patch(
+            `${baseUrl}?bookId=${book.bookId}`,
+            book
+        )
+    }catch (err){
+        console.error(err)
+    }
+}
+ export {GetBooks,DeleteBooks,UpdateBooks}
