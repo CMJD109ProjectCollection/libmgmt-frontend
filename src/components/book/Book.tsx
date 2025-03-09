@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { DeleteBooks, GetBooks, UpdateBooks} from '../../service/Book/Book'
 import { BookEdit } from './BookEdit';
+import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
+import Swal from 'sweetalert2'
+import { AddBook } from './AddBook';
+
 
 
 export const Book = ()=>{
@@ -49,7 +52,9 @@ export const Book = ()=>{
 
      const handleOnDelete = async (bookId :string) =>{
        try{
+         //add confirmation
         await DeleteBooks(bookId);
+    
         setBooks(books.filter((book)=> book.bookId !== bookId))
        }catch(err){
          console.error(err);
@@ -78,6 +83,9 @@ export const Book = ()=>{
 
      return(
          <>
+         <div className="d-flex justify-content-end p-3">
+         <Button variant="outline-primary">Add Book</Button>
+         </div>
          <Table striped bordered hover>
       <thead>
          <tr>
@@ -111,6 +119,7 @@ export const Book = ()=>{
       handleUpdateState = {handleUpdateState}
   
     />
+      <AddBook/>
          </>
      )
 }

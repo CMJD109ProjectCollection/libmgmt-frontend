@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
+import Swal from 'sweetalert2'
+
 interface Book {
   bookId: string;
   title: string;
@@ -47,6 +49,12 @@ export const BookEdit = ({ show, selectedRow, handleOnClose, updateBooks, handle
       try{
         await updateBooks(book);
         handleUpdateState(book)
+        //add alert
+        Swal.fire({
+          title:"Updated",
+          text:"Updated Successfully",
+          icon: 'success'
+        })
         handleClose();
       }catch(err){
         console.error(err)
@@ -64,7 +72,7 @@ export const BookEdit = ({ show, selectedRow, handleOnClose, updateBooks, handle
   return (
     <Modal show={show} onHide={handleOnClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Edit Books</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
