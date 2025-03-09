@@ -54,20 +54,7 @@ const handleSubmit = async () =>{
 
         <Modal.Body>
           <Form>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Book Id"
-              className="mb-3"
-            >
-              <Form.Control
-                type="text"
-                placeholder="name@example.com"
-                name="bookId"
-                value={newBook.bookId}
-                readOnly
-              />
-            </FloatingLabel>
-
+  
             <FloatingLabel
               controlId="floatingInput"
               label="Title"

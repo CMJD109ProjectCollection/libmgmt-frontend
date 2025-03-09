@@ -50,7 +50,7 @@ export const Book = ()=>{
      }
 
      const handleAdd = (newBook:Book) =>{
-       
+       setBooks((prev)=> [...prev,newBook])
      }
 
      const handleOnClose = () => setShowEditForm(false);
