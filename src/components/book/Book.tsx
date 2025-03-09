@@ -49,6 +49,10 @@ export const Book = ()=>{
        setSelectedRow(row)
      }
 
+     const handleAdd = (newBook:Book) =>{
+       
+     }
+
      const handleOnClose = () => setShowEditForm(false);
 
      const handleOnDelete = async (bookId :string) =>{

@@ -1,11 +1,55 @@
+import { useState } from "react";
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
 
-export const AddBook = () => {
+interface Book {
+  bookId: string;
+  title: string;
+  publisher: string;
+  isbn: string;
+  author: string;
+  edition: string;
+  price: number;
+  totalQty: number;
+  avilableQty: number; 
+}
+
+export const AddBook = ({show,handleClose,handleAdd,addBook} :any) => {
+const [newBook,setnewBook] = useState<Book>({
+  bookId: "",
+  title: "",
+  publisher: "",
+  isbn: "",
+  author: "",
+  edition: "",
+  price: 0,
+  totalQty: 0,
+  avilableQty: 0
+});
+const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   const { name, value} = e.target
+   setnewBook((prev)=> ({...prev,[name]:value}))
+}
+const handleSubmit = async () =>{
+  try{
+     // save the form data at the back end
+    const bookDetails =  await addBook(newBook)
+    console.log("Saved Book Details",bookDetails)
+    handleAdd(bookDetails);
+    handleClose();
+
+
+
+  }catch(err){
+    console.error(err)
+    throw err
+  }
+}
+
   return (
     <>
-      <Modal show={show} onHide={handleOnClose} centered>
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Books</Modal.Title>
+          <Modal.Title>Add Book</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -19,7 +63,7 @@ export const AddBook = () => {
                 type="text"
                 placeholder="name@example.com"
                 name="bookId"
-                value={book.bookId}
+                value={newBook.bookId}
                 readOnly
               />
             </FloatingLabel>
@@ -33,7 +77,7 @@ export const AddBook = () => {
                 type="textl"
                 placeholder="name@example.com"
                 name="title"
-                value={book.title}
+                value={newBook.title}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -43,7 +87,7 @@ export const AddBook = () => {
                 type="text"
                 placeholder="Password"
                 name="publisher"
-                value={book.publisher}
+                value={newBook.publisher}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -53,7 +97,7 @@ export const AddBook = () => {
                 type="text"
                 placeholder="Password"
                 name="isbn"
-                value={book.isbn}
+                value={newBook.isbn}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -63,7 +107,7 @@ export const AddBook = () => {
                 type="text"
                 placeholder="Password"
                 name="author"
-                value={book.author}
+                value={newBook.author}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -73,7 +117,7 @@ export const AddBook = () => {
                 type="text"
                 placeholder="Password"
                 name="edition"
-                value={book.edition}
+                value={newBook.edition}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -83,7 +127,7 @@ export const AddBook = () => {
                 type="number"
                 placeholder="Password"
                 name="price"
-                value={book.price}
+                value={newBook.price}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -93,7 +137,7 @@ export const AddBook = () => {
                 type="nuber"
                 placeholder="Password"
                 name="totalQty"
-                value={book.totalQty}
+                value={newBook.totalQty}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -103,7 +147,7 @@ export const AddBook = () => {
                 type="number"
                 placeholder="Password"
                 name="avilableQty"
-                value={book.avilableQty}
+                value={newBook.avilableQty}
                 onChange={handleOnChange}
               />
             </FloatingLabel>
@@ -114,8 +158,8 @@ export const AddBook = () => {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleUpdate}>
-            Update
+          <Button variant="primary" onClick={handleSubmit}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>
