@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { DeleteBooks, GetBooks, UpdateBooks} from '../../service/Book/Book'
+import { AddBookData, DeleteBooks, GetBooks, UpdateBooks} from '../../service/Book/Book'
 import { BookEdit } from './BookEdit';
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
 import Swal from 'sweetalert2'
@@ -41,6 +41,7 @@ export const Book = ()=>{
 
      const [books,setBooks] = useState<Book[]>([]);
      const [showEditForm,setShowEditForm] = useState(false);
+     const [showAddForm,setShowAddForm] = useState(false);
      const [ selectedRow, setSelectedRow]  =useState<Book | null>(null);
 
      const handleOnEdit = (row : Book) =>{
@@ -84,7 +85,7 @@ export const Book = ()=>{
      return(
          <>
          <div className="d-flex justify-content-end p-3">
-         <Button variant="outline-primary">Add Book</Button>
+         <Button variant="outline-primary" onClick={()=> setShowAddForm(true)}>Add Book</Button>
          </div>
          <Table striped bordered hover>
       <thead>
@@ -119,7 +120,12 @@ export const Book = ()=>{
       handleUpdateState = {handleUpdateState}
   
     />
-      <AddBook/>
+      <AddBook
+       show={showAddForm}
+       handleClose={()=> setShowAddForm(false)}
+       handleAdd={handleAdd}
+       addBook={AddBookData}
+      />
          </>
      )
 }

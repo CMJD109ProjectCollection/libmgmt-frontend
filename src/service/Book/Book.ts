@@ -29,4 +29,18 @@ const UpdateBooks = async(book :any) =>{
         console.error(err)
     }
 }
- export {GetBooks,DeleteBooks,UpdateBooks}
+const AddBookData = async (book:any) =>{
+    try{
+        console.log(book)
+        const response = await axios.post(
+            baseUrl,
+            book
+        );
+        return response.data
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+   
+}
+ export {AddBookData,GetBooks,DeleteBooks,UpdateBooks}
