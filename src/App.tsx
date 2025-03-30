@@ -8,12 +8,14 @@ import { Member } from './components/member/Member';
 import { Lending } from './components/lending/Lending';
 import { SignIn } from './components/auth/SignIn';
 import { SignUp } from './components/auth/SignUp';
+import { AuthProvider } from './components/auth/AuthProvider';
 
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <AuthProvider>
         <NavBar/>
           <Routes>
              <Route path="/" element={<Book/>}/>
@@ -24,6 +26,7 @@ function App() {
              <Route path="/signin" element={<SignIn/>}/>
              <Route path="/signup" element={<SignUp/>}/>
           </Routes>
+          </AuthProvider>
       </BrowserRouter>
       </>
    
