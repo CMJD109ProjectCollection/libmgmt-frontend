@@ -33,7 +33,7 @@ const handleOnSubmit = async (e:React.ChangeEvent<HTMLFormElement>) =>{
     //API req
     e.preventDefault();
     console.log(JSON.stringify(signIn))
-    handleReset()
+
 } 
   return (
     <>
