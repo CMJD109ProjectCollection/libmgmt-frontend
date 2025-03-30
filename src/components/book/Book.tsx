@@ -79,21 +79,22 @@ export const Book = ()=>{
        setBooks(updatedBooks)
     }
 
+    const { isAuthenticated } = useAuth(); 
 
-     useEffect(()=>{
-         //load book data
-         const loadData = async ()=>{
-            if(isAuthenticated){
-              const getAllBooks = await GetBooks()
-              setBooks(getAllBooks)
-              console.log("Get All Books",getAllBooks)
-            }
-            navigate("/signin")  
-         };
-         loadData();
-     },[])
 
-     const { isAuthenticated } = useAuth(); 
+  useEffect(() => {
+      const loadData = async () => {
+          if (isAuthenticated) {
+              const getAllBooks = await GetBooks();
+              setBooks(getAllBooks);
+              console.log("Get All Books", getAllBooks);
+          }
+      };
+  
+      loadData();
+  }, [isAuthenticated]); // Load books only if isAuthenticated is true
+
+     
 
      return(
          <>

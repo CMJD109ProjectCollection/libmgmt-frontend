@@ -3,9 +3,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from './auth/AuthProvider';
+import { Button } from 'react-bootstrap';
+import { useNavigate} from "react-router"
 
 function NavBar() {
-  const { isAuthenticated} = useAuth();
+  const { isAuthenticated,logout} = useAuth();
+  const navigate = useNavigate();
+
+  const handleOnLogOut = ()=>{
+    logout()
+    navigate("/signin")
+
+  }
 
   return (
     <>
@@ -19,6 +28,7 @@ function NavBar() {
             <Nav.Link as = {NavLink} to="/staff">Staff</Nav.Link>
             <Nav.Link as = {NavLink} to="/members">Members</Nav.Link>
             <Nav.Link as = {NavLink} to="/lending">Lendings</Nav.Link>
+            <Button variant="warning" onClick={handleOnLogOut}>Logout</Button>
               </>
             ) : (
               <>
