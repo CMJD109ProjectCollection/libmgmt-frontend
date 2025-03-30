@@ -13,6 +13,8 @@ function NavBar() {
             <Nav.Link as = {NavLink} to="/staff">Staff</Nav.Link>
             <Nav.Link as = {NavLink} to="/members">Members</Nav.Link>
             <Nav.Link as = {NavLink} to="/lending">Lendings</Nav.Link>
+            <Nav.Link as = {NavLink} to="/signin">SignIn</Nav.Link>
+            <Nav.Link as = {NavLink} to="/signup">SignUp</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
