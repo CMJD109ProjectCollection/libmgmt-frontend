@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
 import { SignUpReq } from "../../service/AuthProcess/Auth"
+import { useNavigate } from "react-router";
+import { useAuth } from "./AuthProvider";
 
 interface SignUp {
     // userId: string;
@@ -27,6 +29,8 @@ const [ signUp, setSignUp] = useState<SignUp>({
     password: "",
     role: undefined
 })
+const { login} = useAuth();
+const navigate = useNavigate()
 
 const handleReset = () =>{
     setSignUp({
@@ -46,8 +50,9 @@ const handleOnSubmit = async() =>{
     //API req
     console.log(JSON.stringify(signUp))
     const token = await SignUpReq(signUp)
-    console.log(token)
-    handleReset();   
+    login(token)
+    handleReset();
+    navigate("/book")   
 } 
 
   return (

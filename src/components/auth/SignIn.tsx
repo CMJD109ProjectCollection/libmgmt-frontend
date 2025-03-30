@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Form, FloatingLabel } from "react-bootstrap";
+import { useNavigate } from "react-router";
 import { SignInReq } from "../../service/AuthProcess/Auth"
+import { useAuth } from "./AuthProvider";
 
 
 
@@ -17,6 +19,10 @@ const [ signIn, setSignIn] = useState<SignIn>({
     email: "",
     password: ""
 })
+
+const { login} = useAuth();
+const navigate = useNavigate()
+
 
 
 const handleOnChange = (e :React.ChangeEvent<HTMLInputElement>)=>{
@@ -35,9 +41,9 @@ const handleOnSubmit = async (e:React.ChangeEvent<HTMLFormElement>) =>{
     e.preventDefault();
     console.log(JSON.stringify(signIn))
     const token = await SignInReq(signIn)
-    console.log(token)
-
-
+    login(token)
+    handleReset();
+    navigate("/book")
 } 
   return (
     <>
