@@ -5,6 +5,9 @@ import { BookEdit } from './BookEdit';
 import { Button, Form, Modal, FloatingLabel } from "react-bootstrap";
 import Swal from 'sweetalert2'
 import { AddBook } from './AddBook';
+import { useAuth } from '../auth/AuthProvider';
+import { UnAuth } from '../UnAuth';
+import { useNavigate } from "react-router";
 
 
 
@@ -43,6 +46,7 @@ export const Book = ()=>{
      const [showEditForm,setShowEditForm] = useState(false);
      const [showAddForm,setShowAddForm] = useState(false);
      const [ selectedRow, setSelectedRow]  =useState<Book | null>(null);
+     const navigate = useNavigate()
 
      const handleOnEdit = (row : Book) =>{
        setShowEditForm(true)
@@ -79,19 +83,24 @@ export const Book = ()=>{
      useEffect(()=>{
          //load book data
          const loadData = async ()=>{
-            const getAllBooks = await GetBooks()
-            setBooks(getAllBooks)
-            console.log("Get All Books",getAllBooks)
+            if(isAuthenticated){
+              const getAllBooks = await GetBooks()
+              setBooks(getAllBooks)
+              console.log("Get All Books",getAllBooks)
+            }
+            navigate("/signin")  
          };
          loadData();
      },[])
+
+     const { isAuthenticated } = useAuth(); 
 
      return(
          <>
          <div className="d-flex justify-content-end p-3">
          <Button variant="outline-primary" onClick={()=> setShowAddForm(true)}>Add Book</Button>
          </div>
-         <Table striped bordered hover>
+         {isAuthenticated ? (<Table striped bordered hover>
       <thead>
          <tr>
             {tHeadings.map((headings)=> (
@@ -114,7 +123,8 @@ export const Book = ()=>{
            </tr>
         ))}
       </tbody>
-    </Table>
+    </Table>) : (<UnAuth/>) }
+     
     {/* Book Edit */}
     <BookEdit
       show={showEditForm}
@@ -130,6 +140,6 @@ export const Book = ()=>{
        handleAdd={handleAdd}
        addBook={AddBookData}
       />
-         </>
-     )
+    </>
+  )
 }
